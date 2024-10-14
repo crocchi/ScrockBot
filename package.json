@@ -1,0 +1,15 @@
+{
+  "name": "ScrockBot",
+  "version": "1.0.0",
+  "description": " meb bot on solana",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@solana/spl-token": "^0.3.11",
+    "@solana/web3.js": "^1.95",
+  }
+}

@@ -6,10 +6,23 @@ const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 //console.log(connection);
 const tryMe = async ()=>{
     let currentSlot = await connection.getSlot();
-    console.log(currentSlot)
+    console.log(currentSlot);
+    const transactions = await Connection.getConfirmedBlock(currentSlot);
+    
+    // Se ci sono transazioni nel blocco
+    if (transactions && transactions.transactions.length > 0) { 
+            console.log(`\nNew transactions in slot ${slot}:`);
+
+         // Itera sulle transazioni trovate
+              transactions.transactions.forEach((tx) => {
+                      console.log(`- Transaction Signature: ${tx.transaction.signatures[0]}`);
+                    // Puoi aggiungere ulteriori dettagli come account coinvolti, istruzioni, ecc.
+                  console.log(`  Involved Accounts:`, tx.transaction.message.accountKeys.map(key => key.toBase58()));
+                        });
+   }
 }
-setInterval(tryMe,1000)
-tryMe()
+setInterval(tryMe,5000)
+//tryMe()
 /*
 // Funzione per monitorare le transazioni
 async function monitorTransactions() {

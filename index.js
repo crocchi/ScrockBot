@@ -7,7 +7,7 @@ const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 const tryMe = async ()=>{
     let currentSlot = await connection.getSlot();
     console.log(currentSlot);
-    const transactions = await Connection.getConfirmedBlock(currentSlot);
+    const transactions = await connection.getConfirmedBlock(currentSlot);
     
     // Se ci sono transazioni nel blocco
     if (transactions && transactions.transactions.length > 0) { 

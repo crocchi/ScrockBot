@@ -5,7 +5,9 @@ const { Connection, clusterApiUrl, PublicKey} = require('@solana/web3.js');
 const connection = new Connection(clusterApiUrl('dev-net'), 'confirmed');
 cons tryMe = async ()=>{
     let currentSlot = await Connection.getSlot();
+    console.log(currentSlot)
 }
+setInterval(tryMe,5000)
 tryMe()
 /*
 // Funzione per monitorare le transazioni

@@ -3,7 +3,7 @@ const { Connection, clusterApiUrl, PublicKey} = require('@solana/web3.js');
 
 // Connessione a un nodo Solana (puoi scegliere devnet, testnet o mainnet-beta)
 const connection = new Connection(clusterApiUrl('dev-net'), 'confirmed');
-cons tryMe = async ()=>{
+const tryMe = async ()=>{
     let currentSlot = await Connection.getSlot();
     console.log(currentSlot)
 }

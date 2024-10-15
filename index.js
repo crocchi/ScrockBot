@@ -12,6 +12,7 @@ const tryMe = async ()=>{
     // Se ci sono transazioni nel blocco
     if (transactions && transactions.transactions.length > 0) { 
             console.log(`\nNew transactions in slot ${currentSlot}:`);
+            console.log(`\nTotal trans: ${transactions.transactions.length}:`);
 
          // Itera sulle transazioni trovate
               transactions.transactions.forEach((tx) => {
@@ -21,7 +22,7 @@ const tryMe = async ()=>{
                         });
    }
 }
-setInterval(tryMe,5000)
+setInterval(tryMe,30000)
 //tryMe()
 /*
 // Funzione per monitorare le transazioni

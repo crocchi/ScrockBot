@@ -14,6 +14,7 @@ const getBlock = async ()=>{
 // get a specific transaction (allowing for v0 transactions)
 const getTx = async (tx)=> {
 const txx = await connection.getTransaction( tx, { maxSupportedTransactionVersion: 0 } );
+console.log(txx)
 return txx
 }
 
@@ -22,7 +23,7 @@ const tryMe = async ()=>{
     console.log(currentSlot);
     const transactions = await connection.getBlock(currentSlot, {
   maxSupportedTransactionVersion: 0
-})//connection.getConfirmedBlock(currentSlot);
+});
     
     // Se ci sono transazioni nel blocco
     if (transactions && transactions.transactions.length > 0) { 
@@ -32,21 +33,22 @@ const tryMe = async ()=>{
         //console.log(transactions.transactions);
          // Itera sulle transazioni trovate
         
-              transactions.transactions.forEach((tx) => {
+              transactions.transactions.forEach(async (tx) => {
                       console.log(`- Transaction Signature: ${tx.transaction.signatures[0]}`);
                     // Puoi aggiungere ulteriori dettagli come account coinvolti, istruzioni, ecc.
                   console.log(`  Involved Accounts:`, tx.transaction.message.accountKeys.map(key => key.toBase58()));
-                 // let tmpTx= await getTx(tx.transaction.signatures[0])
-                  //console.log()
+                  let tmpTx= await getTx(tx.transaction.signatures[0]);
+                  console.log(`  transaction:${tmpTx}` )
                         });
 
             
    }
 }
-setInterval(tryMe,60000)
+setInterval(tryMe,10000)
 
 //leggi il blocco corrente della rete
 getBlock();
+//tryMe();
 
 //tryMe()
 /*

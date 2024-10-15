@@ -11,6 +11,12 @@ const getBlock = async ()=>{
     console.log('BlockNumber: '+currentSlot);
 }
 
+// get a specific transaction (allowing for v0 transactions)
+const getTx = async (tx)=> {
+const txx = await connection.getTransaction( tx, { maxSupportedTransactionVersion: 0 } );
+return txx
+}
+
 const tryMe = async ()=>{
     currentSlot=currentSlot+1;
     console.log(currentSlot);
@@ -25,14 +31,16 @@ const tryMe = async ()=>{
         //console.log(transactions);
         //console.log(transactions.transactions);
          // Itera sulle transazioni trovate
-        /*
+        
               transactions.transactions.forEach((tx) => {
                       console.log(`- Transaction Signature: ${tx.transaction.signatures[0]}`);
                     // Puoi aggiungere ulteriori dettagli come account coinvolti, istruzioni, ecc.
                   console.log(`  Involved Accounts:`, tx.transaction.message.accountKeys.map(key => key.toBase58()));
+                 // let tmpTx= await getTx(tx.transaction.signatures[0])
+                  //console.log()
                         });
 
-            */
+            
    }
 }
 setInterval(tryMe,2000)

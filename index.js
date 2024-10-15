@@ -20,8 +20,8 @@ const tryMe = async ()=>{
     if (transactions && transactions.transactions.length > 0) { 
             console.log(`\nNew transactions in slot ${currentSlot}:`);
             console.log(`\nTotal trans: ${transactions.transactions.length}:`);
-        console.log(transactions);
-        console.log(transactions.transactions);
+        //console.log(transactions);
+        //console.log(transactions.transactions);
          // Itera sulle transazioni trovate
         /*
               transactions.transactions.forEach((tx) => {
@@ -33,7 +33,7 @@ const tryMe = async ()=>{
             */
    }
 }
-setInterval(tryMe,10000)
+setInterval(tryMe,20000)
 
 //leggi il blocco corrente della rete
 getBlock();
@@ -85,4 +85,24 @@ async function monitorTransactions() {
 
 // Avvia il monitoraggio delle transazioni
 monitorTransactions();
+*/
+/* transactions.transactions
+meta: {
+      computeUnitsConsumed: 2370,
+      err: null,
+      fee: 5000,
+      innerInstructions: [],
+      loadedAddresses: [Object],
+      logMessages: [Array],
+      postBalances: [Array],
+      postTokenBalances: [],
+      preBalances: [Array],
+      preTokenBalances: [],
+      rewards: [],
+      status: [Object]
+    },
+    transaction: { message: [Message], signatures: [Array] },
+    version: undefined
+  },
+  {
 */

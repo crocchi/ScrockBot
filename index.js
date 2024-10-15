@@ -4,8 +4,10 @@ const { Connection, clusterApiUrl, PublicKey} = require('@solana/web3.js');
 // Connessione a un nodo Solana (puoi scegliere devnet, testnet o mainnet-beta)
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 //console.log(connection);
+let currentSlot = await connection.getSlot();
+
 const tryMe = async ()=>{
-    let currentSlot = await connection.getSlot();
+    currentSlot++;
     console.log(currentSlot);
     const transactions = await connection.getBlock(currentSlot)//connection.getConfirmedBlock(currentSlot);
     
@@ -13,7 +15,8 @@ const tryMe = async ()=>{
     if (transactions && transactions.transactions.length > 0) { 
             console.log(`\nNew transactions in slot ${currentSlot}:`);
             console.log(`\nTotal trans: ${transactions.transactions.length}:`);
-console.log(transactions)
+        console.log(transactions);
+        console.log(transactions.transactions);
          // Itera sulle transazioni trovate
         /*
               transactions.transactions.forEach((tx) => {

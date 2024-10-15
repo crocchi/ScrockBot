@@ -43,7 +43,7 @@ const tryMe = async ()=>{
             
    }
 }
-setInterval(tryMe,2000)
+setInterval(tryMe,60000)
 
 //leggi il blocco corrente della rete
 getBlock();

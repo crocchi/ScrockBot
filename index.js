@@ -14,7 +14,9 @@ const getBlock = async ()=>{
 const tryMe = async ()=>{
     currentSlot=currentSlot+1;
     console.log(currentSlot);
-    const transactions = await connection.getBlock(currentSlot)//connection.getConfirmedBlock(currentSlot);
+    const transactions = await connection.getBlock(currentSlot, {
+  maxSupportedTransactionVersion: 0
+})//connection.getConfirmedBlock(currentSlot);
     
     // Se ci sono transazioni nel blocco
     if (transactions && transactions.transactions.length > 0) { 

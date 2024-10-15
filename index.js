@@ -3,10 +3,10 @@ const { Connection, clusterApiUrl, PublicKey} = require('@solana/web3.js');
 
 // Connessione a un nodo Solana (puoi scegliere devnet, testnet o mainnet-beta)
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
-//console.log(connection);
 
 //leggi il blocco corrente della rete
 let currentSlot = connection.getSlot();
+console.log('BlockNumber: '+connection);
 
 const tryMe = async ()=>{
     currentSlot++;

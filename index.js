@@ -11,7 +11,7 @@ const tryMe = async ()=>{
     
     // Se ci sono transazioni nel blocco
     if (transactions && transactions.transactions.length > 0) { 
-            console.log(`\nNew transactions in slot ${slot}:`);
+            console.log(`\nNew transactions in slot ${currentSlot}:`);
 
          // Itera sulle transazioni trovate
               transactions.transactions.forEach((tx) => {

@@ -13,13 +13,16 @@ const tryMe = async ()=>{
     if (transactions && transactions.transactions.length > 0) { 
             console.log(`\nNew transactions in slot ${currentSlot}:`);
             console.log(`\nTotal trans: ${transactions.transactions.length}:`);
-
+console.log(transactions)
          // Itera sulle transazioni trovate
+        /*
               transactions.transactions.forEach((tx) => {
                       console.log(`- Transaction Signature: ${tx.transaction.signatures[0]}`);
                     // Puoi aggiungere ulteriori dettagli come account coinvolti, istruzioni, ecc.
                   console.log(`  Involved Accounts:`, tx.transaction.message.accountKeys.map(key => key.toBase58()));
                         });
+
+            */
    }
 }
 setInterval(tryMe,30000)

@@ -5,11 +5,11 @@ const { Connection, clusterApiUrl, PublicKey} = require('@solana/web3.js');
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 //leggi il blocco corrente della rete
-let currentSlot = connection.getSlot();
-console.log('BlockNumber: '+currentSlot);
+let currentSlot;
+getBlock();
 
 const tryMe = async ()=>{
-    currentSlot++;
+    currentSlot=currentSlot+1;
     console.log(currentSlot);
     const transactions = await connection.getBlock(currentSlot)//connection.getConfirmedBlock(currentSlot);
     
@@ -79,4 +79,7 @@ async function monitorTransactions() {
 // Avvia il monitoraggio delle transazioni
 monitorTransactions();
 */
-
+const getBlock = async ()=>{
+    currentSlot = await connection.getSlot();
+    console.log('BlockNumber: '+currentSlot);
+}

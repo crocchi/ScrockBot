@@ -6,7 +6,7 @@ const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 //leggi il blocco corrente della rete
 let currentSlot = connection.getSlot();
-console.log('BlockNumber: '+connection);
+console.log('BlockNumber: '+currentSlot);
 
 const tryMe = async ()=>{
     currentSlot++;

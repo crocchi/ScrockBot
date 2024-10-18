@@ -1,6 +1,8 @@
 //phoenix exchange
 const contract="PhoeNiXZ8ByJGLkxNfZRnkUfjvmuYqLR89jjFHGqdXY";
 
+const RaydiumConcentratedLiquidity="CAMMCzo5YL8w4VFF8KVHrK22GGUsp5VTaW7grrKgrWqK";
+
 const solanaWeb3 = require('@solana/web3.js');
 
 // Connessione alla mainnet-beta di Solana
@@ -9,19 +11,25 @@ const connection = new solanaWeb3.Connection(
   'confirmed'
 );
 
+//const conn = connection.getProgramAccounts(contract)
+
 (async () => {
   const programId = new solanaWeb3.PublicKey(contract);
 
   // Ascolta le transazioni che coinvolgono il programma Raydium AMM
   connection.onLogs(programId, (logs, ctx) => {
-    console.log("Nuova transazione trovata:");
+    console.log(`Nuova transazione trovata: - ${logs.signature}`);
     console.log("Log:", logs.logs);
-    console.log("Slot:", logs.slot);
+    console.log("Slot:", ctx.slot);
+    //console.log(logs);
+   // console.log(ctx)
 
     // Se vuoi processare ulteriormente, puoi filtrare gli eventi qui
     // Analizza i log per individuare specifiche azioni come scambi, depositi o prelievi.
   });
 })();
+
+/*
 
  if (log.includes("Swap")) {
         console.log("Transazione di Swap trovata:");
@@ -30,59 +38,6 @@ const connection = new solanaWeb3.Connection(
         
         // Puoi aggiungere ulteriori logiche qui per elaborare la transazione
       }
-
-ChatGPT
-ChatGPT
-GPT
-Game Play Prompt Maker
-
-Esplora GPT
-Oggi
-Ascolto transazioni Solana Raydium
-
-Ieri
-Gameplay Prompt Assistance
-Ultimi 7 giorni
-Capri Lovers Tattoo Design
-Maximal Extractable Value Solana
-Aprire account OnlyFans guida
-Ultimi 30 giorni
-Controllo stato stampante PowerShell
-Blockchain Mempool Analysis Script
-Dedica divertente guida Capri
-Rimozione biciclette dalla polizia
-settembre
-Dedica breve per Jenny
-agosto
-JavaScript Async Wait
-luglio
-Richiesta di Finanziamento Progetto
-Sarcastic Giveaway Token Response
-Superconductors explained simply
-Node.js Request with Axios
-giugno
-Crei script asincrono Node.js.
-Context: User wants a title summarizing the conversation. Title: Generating Code and Summarizing
-Axios POST Request Script
-User Requests Assistance
-How It's Made
-Star visit at bar
-maggio
-Rimuovere Stringa da Altra
-Appuntamento con certificato
-Crypto Revolution Begins Now!
-Ottieni API Twitter.
-aprile
-Insalata Mozzarella Capri Buffala
-Prompt Post Twitter: Prodotto.
-Ciao summary: title
-Fai l’upgrade del piano
-Accesso più ampio ai migliori modelli
-
-ChatGPT
-
-Condividi
-
 User
 Hai detto:
 come faccio a rimanere in ascolto delle transazioni che avvengono tipo un un exchange solana defi come radyum, nodejs, web3js
@@ -321,7 +276,7 @@ const connection = new solanaWeb3.Connection(
   solanaWeb3.clusterApiUrl('mainnet-beta'),
   'confirmed'
 );
-/*
+
 // Indirizzo del programma Raydium AMM
 const programId = new solanaWeb3.PublicKey("5quB7NZrGKG8UVJa3f9H4BihV3XtpeUTyFeVZzsXPs3g");
 

@@ -1,10 +1,46 @@
-const { Connection, clusterApiUrl, PublicKey} = require('@solana/web3.js');
+const { Connection, clusterApiUrl, PublicKey, Keypair, LAMPORTS_PER_SOL, Transaction,SystemProgram,sendAndConfirmTransaction} = require('@solana/web3.js');
+//utility
+const { lamportsToSol } = require("./utility.js")
 
 
 // Connessione a un nodo Solana (puoi scegliere devnet, testnet o mainnet-beta)
 const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
 
 let currentSlot;
+
+// Airdrop SOL for paying transactions
+const airdrop = async() =>{
+
+    let myWallet = Keypair.generate();
+    console.log(myWallet);
+
+
+let airdropSignature = await connection.requestAirdrop(
+    myWallet.publicKey,
+    LAMPORTS_PER_SOL,
+  );
+   
+  await connection.confirmTransaction({ signature: airdropSignature });
+   
+  let toAccount = Keypair.generate();
+   
+  // Create Simple Transaction
+  let transaction = new Transaction();
+  // Add an instruction to execute
+transaction.add(
+    SystemProgram.transfer({
+      fromPubkey: myWallet.publicKey,
+      toPubkey: toAccount.publicKey,
+      lamports: 1000,
+    }),
+  );
+   
+  // Send and confirm transaction
+  // Note: feePayer is by default the first signer, or payer, if the parameter is not set
+  await sendAndConfirmTransaction(connection, transaction, [myWallet]);
+}
+airdrop()
+
 
 const getBlock = async ()=>{
     currentSlot = await connection.getSlot();
@@ -22,7 +58,8 @@ const tryMe = async ()=>{
     currentSlot=currentSlot+1;
     console.log(currentSlot);
     const transactions = await connection.getBlock(currentSlot, {
-  maxSupportedTransactionVersion: 0
+  maxSupportedTransactionVersion: 0,
+  rewards: false
 });
     
     // Se ci sono transazioni nel blocco
@@ -31,24 +68,44 @@ const tryMe = async ()=>{
             console.log(`\nTotal trans: ${transactions.transactions.length}:`);
         //console.log(transactions);
         //console.log(transactions.transactions);
+
+        for (let slot = 0; slot <= 2/*transactions.transactions.length-1*/; slot++) {
+            console.log(`- Transaction Signature: ${transactions.transactions[slot].transaction.signatures[0]}`);
+            // Puoi aggiungere ulteriori dettagli come account coinvolti, istruzioni, ecc.
+            try{
+            console.log(`  Involved Accounts:`, transactions.transactions[slot].transaction.message.accountKeys.map(key => key.toBase58()));
+        }catch(e){
+            console.log(`  info: ${transactions.transactions[slot].transaction.message}`)
+        }
+            // console.log(`  allInfo:`, transactions.transactions[slot]);
+            //let tmpTx= await getTx(transactions.transactions[slot].transaction.signatures[0]);
+            console.log(`  Instruction:`, transactions.transactions[slot].transaction.message.instructions);
+            console.log(`  header:`, transactions.transactions[slot].transaction.message.header);
+            console.log(`  Fee SOL:`, lamportsToSol(transactions.transactions[slot].meta.fee));
+            console.log(`  Log Msg:  ${transactions.transactions[slot].meta.logMessages}\n `);
+            console.log(`  Balance:  SOL:${lamportsToSol(transactions.transactions[slot].meta.postBalances[0])}\n SOL:${lamportsToSol(transactions.transactions[slot].meta.postBalances[1])}  `);
+            
+            //console.log(`  transaction:${0}  `,tmpTx )
+            // console.log(`  indexToPrograms IDS:`, transactions.transactions[slot].transaction.message.indexToProgramIds.map(key => key.toBase58()));
+        }
+
          // Itera sulle transazioni trovate
-        
+        /*
               transactions.transactions.forEach(async (tx) => {
                       console.log(`- Transaction Signature: ${tx.transaction.signatures[0]}`);
                     // Puoi aggiungere ulteriori dettagli come account coinvolti, istruzioni, ecc.
                   console.log(`  Involved Accounts:`, tx.transaction.message.accountKeys.map(key => key.toBase58()));
                   let tmpTx= await getTx(tx.transaction.signatures[0]);
                   console.log(`  transaction:${tmpTx}` )
-                        });
-
+                        });*/
+                        //fine itera
             
-   }
+   }//fine if
 }
 setInterval(tryMe,10000)
 
 //leggi il blocco corrente della rete
 getBlock();
-//tryMe();
 
 //tryMe()
 /*

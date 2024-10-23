@@ -23,7 +23,13 @@ const connection = new solanaWeb3.Connection(
     console.log("Slot:", ctx.slot);
     //console.log(logs);
    // console.log(ctx)
-
+   if (logs.logs.includes("Instruction: Swap")) {
+    console.log("Transazione di Swap trovata:");
+    console.log("Log:", logs.logs);
+    console.log("Slot:", ctx.slot);
+    
+    // Puoi aggiungere ulteriori logiche qui per elaborare la transazione
+  }
     // Se vuoi processare ulteriormente, puoi filtrare gli eventi qui
     // Analizza i log per individuare specifiche azioni come scambi, depositi o prelievi.
   });

@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@solana/web3.js": "^1.95.3"
+    "@ellipsis-labs/phoenix-sdk": "^2.0.3",
+    "@project-serum/serum": "^0.13.65",
+    "@solana/web3.js": "^1.95.3",
+    "node": "^22.10.0"
   }
 }

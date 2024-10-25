@@ -154,7 +154,7 @@ console.log(price,quantity)
         updates++;
       }//else break
      await phoenix.refreshMarket(marketAddress);
-     await new Promise((res) => setTimeout(res, 1000));
+     await new Promise((res) => setTimeout(res, 2000));
      console.log('yo')
     }
 

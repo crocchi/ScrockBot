@@ -139,6 +139,7 @@ console.log(price,quantity)
     lastValidUnixTimestampInSeconds: <BN: 671909b5>
 
   } */
+        /*
  //monitorare prezzo coppia
     let lastLadder= Phoenix.UiLadder | null;
     
@@ -157,6 +158,7 @@ console.log(price,quantity)
      await new Promise((res) => setTimeout(res, 2000));
      console.log('yo')
     }
+    */
 
     console.timeEnd('processData');
       //console.log(marketState.data.bids[1][0].priceInTicks.toString(16))

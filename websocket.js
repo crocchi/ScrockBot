@@ -23,9 +23,9 @@ const subscriptionId = connection.onAccountChange(
     (updatedAccountInfo) =>{
         console.log(`---Event Notification for ${publicKey.toString()}--- \nNew Account Balance:`, updatedAccountInfo);
        // console.log(Phoenix.deserializeMarketData(updatedAccountInfo.data))
-       const decoded = bs58.decode(updatedAccountInfo.data.toString());
+      // const decoded = bs58.decode(updatedAccountInfo.data.toString());
 
-       const instructionEnum = decoded[0];
+      // const instructionEnum = decoded[0];
        console.log(instructionEnum)
     },
     "confirmed"

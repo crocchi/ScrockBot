@@ -144,7 +144,7 @@ console.log(price,quantity)
     
     //console.log(lastLadder,ladder)
     let updates = 0;
-    while (updates < 5) {
+    while (updates < 3) {
       let ladder = phoenix.getUiLadder(marketAddress);
       if (JSON.stringify(ladder) !== JSON.stringify(lastLadder)) {
         //console.clear();

@@ -11,7 +11,7 @@ console.time('timeNodeConnect');
 
 //const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'),{wsEndpoint:solanaNodeWebSocket})
 
-const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'))
+const connection = new solanaWeb3.Connection(solanaChainstack)
 
 console.log('connessa al nodo..');
 console.timeEnd('timeNodeConnect');

@@ -9,9 +9,9 @@ const solanaChainstack='https://solana-mainnet.core.chainstack.com/78996579e7153
 // Inizio del timer
 console.time('timeNodeConnect');
 
-//const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'),{wsEndpoint:solanaNodeWebSocket})
+const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'),{wsEndpoint:solanaNodeWebSocket})
 
-const connection = new solanaWeb3.Connection(solanaChainstack)
+//const connection = new solanaWeb3.Connection(solanaChainstack)
 
 console.log('connessa al nodo..');
 console.timeEnd('timeNodeConnect');

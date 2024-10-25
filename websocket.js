@@ -26,7 +26,7 @@ const subscriptionId = connection.onAccountChange(
       // const decoded = bs58.decode(updatedAccountInfo.data.toString());
 
       // const instructionEnum = decoded[0];
-       console.log(instructionEnum)
+       //console.log(instructionEnum)
     },
     "confirmed"
 );

@@ -3,9 +3,14 @@ const solanaWeb3 = require('@solana/web3.js');
 const Phoenix = require('@ellipsis-labs/phoenix-sdk');
 const BN = require('bn.js');
 
+// URL del nodo Solana RPC con supporto WebSocket
+const solanaNodeWebSocket = 'wss://api.mainnet-beta.solana.com';
+const solanaChainstack='https://solana-mainnet.core.chainstack.com/78996579e71535c10dbc3474cf8eea38'
 // Inizio del timer
 console.time('timeNodeConnect');
-const connection = new solanaWeb3.Connection(/*'https://solana-mainnet.core.chainstack.com/78996579e71535c10dbc3474cf8eea38'*/ solanaWeb3.clusterApiUrl('mainnet-beta'))
+
+const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'),{wsEndpoint:solanaNodeWebSocket})
+
 console.log('connessa al nodo..');
 console.timeEnd('timeNodeConnect');
 
@@ -31,16 +36,7 @@ function findMarketByName(name,marketConfigs) {
     }
     return null; // Restituisce null se non viene trovato il mercato
 }
-// Funzione per cercare tramite il nome del mercato
-function findMarketById(id,marketConfigs) {
-    
-    for (const [key, value] of marketConfigs) {
-        if (value.address === id) {
-            return value;
-        }
-    }
-    return null; // Restituisce null se non viene trovato il mercato
-}
+// Funzione per cercare tramite il contratto id
 
 const findMarket = async (id,data) =>{
 
@@ -125,7 +121,7 @@ console.log(price,quantity)
       //console.log(marketState.data.bids[0])
       for (let bid of marketState.data.bids) {
         let prcTmp=(convertBN(bid[0].priceInTicks.toString(16)))*0.001;
-        if(prcTmp < 150.000){continue}
+        if(prcTmp < 160.000){continue}
       console.log(`
         priceInTicks: $${prcTmp} - numBaseLots(amountSol):SOL ${convertBN(bid[1].numBaseLots.toString(16))*0.001}  traderIndex:${convertBN(bid[1].traderIndex.toString(16))} 
         USDC: ${(convertBN(bid[1].numBaseLots.toString(16))*0.001)*prcTmp}
@@ -143,6 +139,25 @@ console.log(price,quantity)
     lastValidUnixTimestampInSeconds: <BN: 671909b5>
 
   } */
+ //monitorare prezzo coppia
+    let lastLadder= Phoenix.UiLadder | null;
+    
+    //console.log(lastLadder,ladder)
+    let updates = 0;
+    while (updates < 5) {
+      let ladder = phoenix.getUiLadder(marketAddress);
+      if (JSON.stringify(ladder) !== JSON.stringify(lastLadder)) {
+        //console.clear();
+        console.log("Ladder update", updates + 1, "of", 10, "\n");
+        phoenix.printLadder(marketAddress);
+        lastLadder = ladder;
+        updates++;
+      }//else break
+     await phoenix.refreshMarket(marketAddress);
+     await new Promise((res) => setTimeout(res, 1000));
+     console.log('yo')
+    }
+
     console.timeEnd('processData');
       //console.log(marketState.data.bids[1][0].priceInTicks.toString(16))
       //console.log(marketState.data.bids[1])

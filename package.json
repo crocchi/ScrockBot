@@ -12,6 +12,7 @@
     "@ellipsis-labs/phoenix-sdk": "^2.0.3",
     "@project-serum/serum": "^0.13.65",
     "@solana/web3.js": "^1.95.3",
+    "bs58": "^6.0.0",
     "node": "^22.10.0"
   }
 }

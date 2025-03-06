@@ -44,7 +44,7 @@ const {ethers} = require('ethers');
 const web3 = require('web3');
 
 //calcoli precisi con numeri decimali
-const bigNumb =require('bignumber.js');
+//const bigNumb =require('bignumber.js');
 //bignumber.js
 //#*#*#*#*#*#*#**#*#*#**#*#*#*#*#*#*#*
 
